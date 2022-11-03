@@ -1,16 +1,17 @@
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-
-import * as SplashScreen from "expo-splash-screen";
-console.log("App.js");
-
-SplashScreen.hideAsync();
+import { Linking, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
-  console.log("App");
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    Linking.getInitialURL().then(setUrl);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Hello world</Text>
+      <Text>{JSON.stringify({ url })}</Text>
       <StatusBar style="auto" />
     </View>
   );
